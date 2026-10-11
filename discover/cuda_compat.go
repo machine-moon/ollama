@@ -19,9 +19,9 @@ const (
 )
 
 func filterOldCUDADriver(_ context.Context, devices []ml.DeviceInfo) []ml.DeviceInfo {
-	oldCUDA := func(dev ml.DeviceInfo) bool {
-		return dev.Library == "CUDA" && dev.ComputeMajor > 0 && dev.ComputeMajor < 7
-	}
+	//oldCUDA := func(dev ml.DeviceInfo) bool {
+	//	return dev.Library == "CUDA" && dev.ComputeMajor > 0 && dev.ComputeMajor < 7
+	//}
 
 	hasCUDA := false
 	for _, dev := range devices {
@@ -66,11 +66,11 @@ func filterOldCUDADriver(_ context.Context, devices []ml.DeviceInfo) []ml.Device
 				"device", dev.Description, "compute", dev.Compute(), "driver", driver, "required_driver", "550 or newer")
 			continue
 		}
-		if runtimeMayJITLegacyCompute && oldCUDA(dev) {
-			slog.Warn("NVIDIA driver too old",
-				"device", dev.Description, "compute", dev.Compute(), "driver", driver, "required_driver", "570 or newer")
-			continue
-		}
+		//if runtimeMayJITLegacyCompute && oldCUDA(dev) {
+		//	slog.Warn("NVIDIA driver too old",
+		//		"device", dev.Description, "compute", dev.Compute(), "driver", driver, "required_driver", "570 or newer")
+		//	continue
+		//}
 		filtered = append(filtered, dev)
 	}
 	return filtered
